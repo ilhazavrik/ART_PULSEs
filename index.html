@@ -12,6 +12,7 @@
         --light: #F7F7FA;
         --gray: #6B6B7B;
         --white: #FFFFFF;
+        --vk: #0077FF;      /* фирменный синий ВКонтакте */
         --radius: 16px;
         --shadow: 0 8px 30px rgba(26, 26, 46, 0.08);
         --shadow-hover: 0 15px 40px rgba(255, 77, 46, 0.18);
@@ -630,7 +631,6 @@
 
     .form-card .btn { width: 100%; text-align: center; }
 
-    /* Сообщение об успехе */
     .form-success {
         display: none;
         text-align: center;
@@ -700,24 +700,59 @@
         line-height: 1.7;
     }
 
+    /* ✅ Только ВКонтакте — фирменная кнопка */
     .socials { display: flex; gap: 10px; }
 
     .socials a {
-        width: 42px; height: 42px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 18px;
         background: rgba(255,255,255,0.08);
         border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .socials a.vk {
+        background: rgba(0, 119, 255, 0.15);
+        border-color: rgba(0, 119, 255, 0.4);
+    }
+
+    .socials a.vk:hover {
+        background: var(--vk);
+        border-color: var(--vk);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 119, 255, 0.4);
+    }
+
+    .socials a .vk-icon {
+        width: 26px; height: 26px;
+        background: var(--vk);
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 18px;
-        text-decoration: none;
+        font-size: 13px;
+        font-weight: 800;
         color: white;
         transition: all 0.3s;
     }
 
-    .socials a:hover {
-        background: var(--primary);
-        transform: translateY(-3px);
+    .socials a.vk:hover .vk-icon {
+        background: white;
+        color: var(--vk);
+    }
+
+    .socials a .vk-label small {
+        display: block;
+        font-size: 10px;
+        font-weight: 500;
+        opacity: 0.7;
     }
 
     .footer-col h4 {
@@ -811,7 +846,6 @@
             <li><a href="#services" onclick="closeMenu()">Услуги</a></li>
             <li><a href="#contacts" onclick="closeMenu()">Контакты</a></li>
         </ul>
-        <!-- ✅ РАБОЧАЯ КНОПКА "ЗАКАЗАТЬ ЗВОНОК" -->
         <button class="btn btn-primary" onclick="orderCall()">Заказать звонок</button>
         <div class="burger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
@@ -988,7 +1022,6 @@
                     <div class="ico">📍</div>
                     <div>г. Пермь, ул. Ленина</div>
                 </div>
-                <!-- ✅ ВАШ НОМЕР -->
                 <div class="cta-contact">
                     <div class="ico">📞</div>
                     <a href="tel:+79307473341">+7 (930) 747-33-41</a>
@@ -1005,7 +1038,6 @@
         </div>
 
         <div class="form-card">
-            <!-- ФОРМА -->
             <form id="orderForm" onsubmit="submitForm(event)">
                 <h3>Оставить заявку</h3>
                 <p class="sub">Заполните форму — и мы свяжемся с вами</p>
@@ -1050,11 +1082,9 @@
                     <span>Я согласен на обработку персональных данных</span>
                 </label>
 
-                <!-- ✅ КНОПКА ОТПРАВКИ -->
                 <button type="submit" class="btn btn-primary">Отправить заявку</button>
             </form>
 
-            <!-- СООБЩЕНИЕ ОБ УСПЕХЕ -->
             <div class="form-success" id="formSuccess">
                 <div class="check">✓</div>
                 <h4>Заявка успешно отправлена!</h4>
@@ -1078,13 +1108,23 @@
                     </div>
                 </a>
                 <p>Новая и современная компания будущего. Мы всей душой болеем за рекламное дело!</p>
+
+                <!-- ✅ ТОЛЬКО ВКОНТАКТЕ, С ССЫЛКОЙ НА ГРУППУ -->
                 <div class="socials">
-                    <a href="#" title="ВКонтакте">VK</a>
-                    <a href="#" title="Telegram">TG</a>
-                    <a href="#" title="WhatsApp">WA</a>
-                    <a href="#" title="Instagram">IG</a>
+                    <a class="vk"
+                       href="https://vk.ru/club241872888#section=wall"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       title="Наша группа ВКонтакте">
+                        <span class="vk-icon">VK</span>
+                        <span class="vk-label">
+                            ВКонтакте
+                            <small>наша группа</small>
+                        </span>
+                    </a>
                 </div>
             </div>
+
             <div class="footer-col">
                 <h4>Компания</h4>
                 <ul>
@@ -1093,6 +1133,7 @@
                     <li><a href="#contacts">Контакты</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
                 <h4>Услуги</h4>
                 <ul>
@@ -1102,17 +1143,18 @@
                     <li><a href="#services">SMM</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
                 <h4>Контакты</h4>
                 <ul class="footer-contacts">
                     <li>📍 г. Пермь, ул. Ленина</li>
-                    <!-- ✅ ВАШ НОМЕР -->
                     <li>📞 <a href="tel:+79307473341">+7 (930) 747-33-41</a></li>
                     <li>✉️ <a href="mailto:artpulse@mail.ru">artpulse@mail.ru</a></li>
                     <li>🕐 Пн–Пт: 9:00 – 19:00</li>
                 </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
             <div>© 2025 АРТ-ПУЛЬС. Все права защищены.</div>
             <div>Сделано с ❤️ в Перми</div>
@@ -1131,9 +1173,7 @@
 
     // ===== КНОПКА "ЗАКАЗАТЬ ЗВОНОК" =====
     function orderCall() {
-        // Плавно прокручиваем к форме
         document.getElementById('contacts').scrollIntoView({ behavior: 'smooth' });
-        // Фокусируем поле "Имя" через небольшую задержку (после прокрутки)
         setTimeout(() => {
             const nameInput = document.getElementById('nameInput');
             if (nameInput) nameInput.focus();
@@ -1142,9 +1182,7 @@
 
     // ===== ОТПРАВКА ФОРМЫ (без сервера) =====
     function submitForm(event) {
-        event.preventDefault(); // отменяем реальную отправку
-
-        // Скрываем форму, показываем сообщение об успехе
+        event.preventDefault();
         document.getElementById('orderForm').style.display = 'none';
         document.getElementById('formSuccess').classList.add('show');
     }
@@ -1152,7 +1190,7 @@
     // ===== СБРОС ФОРМЫ =====
     function resetForm() {
         const form = document.getElementById('orderForm');
-        form.reset();               // очищаем поля
+        form.reset();
         form.style.display = 'block';
         document.getElementById('formSuccess').classList.remove('show');
     }
